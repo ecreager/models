@@ -37,6 +37,8 @@ from __future__ import print_function
 
 import tensorflow as tf
 
+print('testing changes to submodule from supermodule')
+
 _R_MEAN = 123.68
 _G_MEAN = 116.78
 _B_MEAN = 103.94
