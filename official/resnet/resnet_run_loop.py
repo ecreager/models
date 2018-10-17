@@ -29,7 +29,7 @@ import os
 # pylint: disable=g-bad-import-order
 from absl import flags
 import tensorflow as tf
-from metrics import f_score
+from official.resnet.metrics import f_score
 
 from official.resnet import resnet_model
 from official.utils.flags import core as flags_core
@@ -260,11 +260,12 @@ def resnet_model_fn(features, labels, mode, model_class,
   # not a SparseTensor). If dtype is is low precision, logits must be cast to
   # fp32 for numerical stability.
   logits = tf.cast(logits, tf.float32)
-  preds = tf.nn.sigmoid(logits)
+  sigmoids = tf.nn.sigmoid(logits)
+  preds = tf.round(sigmoids)
 
   predictions = {
       'classes': preds,
-      'probabilities': tf.nn.softmax(logits, name='softmax_tensor')
+      'sigmoids': sigmoids,
   }
 
   if mode == tf.estimator.ModeKeys.PREDICT:
@@ -346,14 +347,15 @@ def resnet_model_fn(features, labels, mode, model_class,
   else:
     train_op = None
 
-  score = f_score(labels, preds)
+  score01 = f_score(labels, sigmoids, threshold=0.1)
+  score025 = f_score(labels, sigmoids, threshold=0.25)
+  score05 = f_score(labels, sigmoids, threshold=0.5)
+  score075 = f_score(labels, sigmoids, threshold=0.75)
 
-  score = tf.Print(score, [score], message='F-score')
-    
   recall = tf.metrics.recall(labels, preds)
   precision = tf.metrics.precision(labels, preds)
 
-  score_tf = tf.contrib.metrics.f1_score(labels, preds)
+  score_tf = tf.contrib.metrics.f1_score(labels, sigmoids)
 
   metrics = {'recall': recall,
              'precision': precision,
@@ -373,8 +375,17 @@ def resnet_model_fn(features, labels, mode, model_class,
   tf.summary.scalar('f1_score', score_tf[1])
 
   # Create a tensor named f2_score for logging purposes
-  tf.identity(score, name='f2_score')
-  tf.summary.scalar('f2_score', score)
+  tf.identity(score01, name='f2_score_01')
+  tf.summary.scalar('f2_score_01', score01)
+  # Create a tensor named f2_score for logging purposes
+  tf.identity(score025, name='f2_score_025')
+  tf.summary.scalar('f2_score_025', score025)
+  # Create a tensor named f2_score for logging purposes
+  tf.identity(score05, name='f2_score_05')
+  tf.summary.scalar('f2_score_05', score05)
+  # Create a tensor named f2_score for logging purposes
+  tf.identity(score075, name='f2_score_075')
+  tf.summary.scalar('f2_score_075', score075)
 
   return tf.estimator.EstimatorSpec(
       mode=mode,
@@ -460,7 +471,10 @@ def resnet_main(
         'cross_entropy': 'cross_entropy',
         'train_recall': 'train_recall',
         'train_precision': 'train_precision',
-        'f2_score': 'f2_score',
+        'f2_score_01': 'f2_score_01',
+        'f2_score_025': 'f2_score_025',
+        'f2_score_05': 'f2_score_05',
+        'f2_score_075': 'f2_score_075',
         'f1_score': 'f1_score'
     }
 
@@ -575,8 +589,6 @@ def define_resnet_flags(resnet_size_choices=None):
           'the expense of image resize/cropping being done as part of model '
           'inference. Note, this flag only applies to ImageNet and cannot '
           'be used for CIFAR.'))
-
-  flags.DEFINE_string(name='key', default=None, help=flags_core.help_wrap('Key for gcloud bucket.'))
 
   choice_kwargs = dict(
       name='resnet_size', short_name='rs', default='50',
