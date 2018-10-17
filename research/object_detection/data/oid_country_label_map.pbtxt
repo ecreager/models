@@ -1,0 +1,1160 @@
+item {
+  name: "Afghanistan"
+  id: 1
+  display_name: "Afghanistan"
+}
+item {
+  name: "Aland Islands"
+  id: 2
+  display_name: "Aland Islands"
+}
+item {
+  name: "Albania"
+  id: 3
+  display_name: "Albania"
+}
+item {
+  name: "Algeria"
+  id: 4
+  display_name: "Algeria"
+}
+item {
+  name: "Andorra"
+  id: 5
+  display_name: "Andorra"
+}
+item {
+  name: "Angola"
+  id: 6
+  display_name: "Angola"
+}
+item {
+  name: "Anguilla"
+  id: 7
+  display_name: "Anguilla"
+}
+item {
+  name: "Antigua and Barbuda"
+  id: 8
+  display_name: "Antigua and Barbuda"
+}
+item {
+  name: "Argentina"
+  id: 9
+  display_name: "Argentina"
+}
+item {
+  name: "Armenia"
+  id: 10
+  display_name: "Armenia"
+}
+item {
+  name: "Aruba"
+  id: 11
+  display_name: "Aruba"
+}
+item {
+  name: "Australia"
+  id: 12
+  display_name: "Australia"
+}
+item {
+  name: "Austria"
+  id: 13
+  display_name: "Austria"
+}
+item {
+  name: "Azerbaijan"
+  id: 14
+  display_name: "Azerbaijan"
+}
+item {
+  name: "Bahrain"
+  id: 15
+  display_name: "Bahrain"
+}
+item {
+  name: "Bangladesh"
+  id: 16
+  display_name: "Bangladesh"
+}
+item {
+  name: "Barbados"
+  id: 17
+  display_name: "Barbados"
+}
+item {
+  name: "Belarus"
+  id: 18
+  display_name: "Belarus"
+}
+item {
+  name: "Belgium"
+  id: 19
+  display_name: "Belgium"
+}
+item {
+  name: "Belize"
+  id: 20
+  display_name: "Belize"
+}
+item {
+  name: "Benin"
+  id: 21
+  display_name: "Benin"
+}
+item {
+  name: "Bermuda"
+  id: 22
+  display_name: "Bermuda"
+}
+item {
+  name: "Bhutan"
+  id: 23
+  display_name: "Bhutan"
+}
+item {
+  name: "Bolivia"
+  id: 24
+  display_name: "Bolivia"
+}
+item {
+  name: "Bosnia and Herzegovina"
+  id: 25
+  display_name: "Bosnia and Herzegovina"
+}
+item {
+  name: "Botswana"
+  id: 26
+  display_name: "Botswana"
+}
+item {
+  name: "Brazil"
+  id: 27
+  display_name: "Brazil"
+}
+item {
+  name: "British Virgin Islands"
+  id: 28
+  display_name: "British Virgin Islands"
+}
+item {
+  name: "Brunei"
+  id: 29
+  display_name: "Brunei"
+}
+item {
+  name: "Bulgaria"
+  id: 30
+  display_name: "Bulgaria"
+}
+item {
+  name: "Burkina Faso"
+  id: 31
+  display_name: "Burkina Faso"
+}
+item {
+  name: "Burundi"
+  id: 32
+  display_name: "Burundi"
+}
+item {
+  name: "Cambodia"
+  id: 33
+  display_name: "Cambodia"
+}
+item {
+  name: "Cameroon"
+  id: 34
+  display_name: "Cameroon"
+}
+item {
+  name: "Canada"
+  id: 35
+  display_name: "Canada"
+}
+item {
+  name: "Cape Verde"
+  id: 36
+  display_name: "Cape Verde"
+}
+item {
+  name: "Caribbean Netherlands"
+  id: 37
+  display_name: "Caribbean Netherlands"
+}
+item {
+  name: "Cayman Islands"
+  id: 38
+  display_name: "Cayman Islands"
+}
+item {
+  name: "Central African Republic"
+  id: 39
+  display_name: "Central African Republic"
+}
+item {
+  name: "Chad"
+  id: 40
+  display_name: "Chad"
+}
+item {
+  name: "Chile"
+  id: 41
+  display_name: "Chile"
+}
+item {
+  name: "China"
+  id: 42
+  display_name: "China"
+}
+item {
+  name: "Christmas Island"
+  id: 43
+  display_name: "Christmas Island"
+}
+item {
+  name: "Colombia"
+  id: 44
+  display_name: "Colombia"
+}
+item {
+  name: "Comoros"
+  id: 45
+  display_name: "Comoros"
+}
+item {
+  name: "Congo"
+  id: 46
+  display_name: "Congo"
+}
+item {
+  name: "Cook Islands"
+  id: 47
+  display_name: "Cook Islands"
+}
+item {
+  name: "Costa Rica"
+  id: 48
+  display_name: "Costa Rica"
+}
+item {
+  name: "Croatia"
+  id: 49
+  display_name: "Croatia"
+}
+item {
+  name: "Cuba"
+  id: 50
+  display_name: "Cuba"
+}
+item {
+  name: "Curacao"
+  id: 51
+  display_name: "Curacao"
+}
+item {
+  name: "Cyprus"
+  id: 52
+  display_name: "Cyprus"
+}
+item {
+  name: "Czech Republic"
+  id: 53
+  display_name: "Czech Republic"
+}
+item {
+  name: "Democratic Republic of Congo"
+  id: 54
+  display_name: "Democratic Republic of Congo"
+}
+item {
+  name: "Denmark"
+  id: 55
+  display_name: "Denmark"
+}
+item {
+  name: "Djibouti"
+  id: 56
+  display_name: "Djibouti"
+}
+item {
+  name: "Dominica"
+  id: 57
+  display_name: "Dominica"
+}
+item {
+  name: "Dominican Republic"
+  id: 58
+  display_name: "Dominican Republic"
+}
+item {
+  name: "East Timor"
+  id: 59
+  display_name: "East Timor"
+}
+item {
+  name: "Ecuador"
+  id: 60
+  display_name: "Ecuador"
+}
+item {
+  name: "Egypt"
+  id: 61
+  display_name: "Egypt"
+}
+item {
+  name: "El Salvador"
+  id: 62
+  display_name: "El Salvador"
+}
+item {
+  name: "Equatorial Guinea"
+  id: 63
+  display_name: "Equatorial Guinea"
+}
+item {
+  name: "Eritrea"
+  id: 64
+  display_name: "Eritrea"
+}
+item {
+  name: "Estonia"
+  id: 65
+  display_name: "Estonia"
+}
+item {
+  name: "Ethiopia"
+  id: 66
+  display_name: "Ethiopia"
+}
+item {
+  name: "Falkland Islands"
+  id: 67
+  display_name: "Falkland Islands"
+}
+item {
+  name: "Faroe Islands"
+  id: 68
+  display_name: "Faroe Islands"
+}
+item {
+  name: "Federated States of Micronesia"
+  id: 69
+  display_name: "Federated States of Micronesia"
+}
+item {
+  name: "Fiji"
+  id: 70
+  display_name: "Fiji"
+}
+item {
+  name: "Finland"
+  id: 71
+  display_name: "Finland"
+}
+item {
+  name: "France"
+  id: 72
+  display_name: "France"
+}
+item {
+  name: "French Guiana"
+  id: 73
+  display_name: "French Guiana"
+}
+item {
+  name: "French Polynesia"
+  id: 74
+  display_name: "French Polynesia"
+}
+item {
+  name: "Gabon"
+  id: 75
+  display_name: "Gabon"
+}
+item {
+  name: "Georgia"
+  id: 76
+  display_name: "Georgia"
+}
+item {
+  name: "Germany"
+  id: 77
+  display_name: "Germany"
+}
+item {
+  name: "Ghana"
+  id: 78
+  display_name: "Ghana"
+}
+item {
+  name: "Gibraltar"
+  id: 79
+  display_name: "Gibraltar"
+}
+item {
+  name: "Greece"
+  id: 80
+  display_name: "Greece"
+}
+item {
+  name: "Greenland"
+  id: 81
+  display_name: "Greenland"
+}
+item {
+  name: "Grenada"
+  id: 82
+  display_name: "Grenada"
+}
+item {
+  name: "Guadeloupe"
+  id: 83
+  display_name: "Guadeloupe"
+}
+item {
+  name: "Guam"
+  id: 84
+  display_name: "Guam"
+}
+item {
+  name: "Guatemala"
+  id: 85
+  display_name: "Guatemala"
+}
+item {
+  name: "Guinea"
+  id: 86
+  display_name: "Guinea"
+}
+item {
+  name: "Guinea-Bissau"
+  id: 87
+  display_name: "Guinea-Bissau"
+}
+item {
+  name: "Guyana"
+  id: 88
+  display_name: "Guyana"
+}
+item {
+  name: "Haiti"
+  id: 89
+  display_name: "Haiti"
+}
+item {
+  name: "Honduras"
+  id: 90
+  display_name: "Honduras"
+}
+item {
+  name: "Hong Kong"
+  id: 91
+  display_name: "Hong Kong"
+}
+item {
+  name: "Hungary"
+  id: 92
+  display_name: "Hungary"
+}
+item {
+  name: "Iceland"
+  id: 93
+  display_name: "Iceland"
+}
+item {
+  name: "India"
+  id: 94
+  display_name: "India"
+}
+item {
+  name: "Indonesia"
+  id: 95
+  display_name: "Indonesia"
+}
+item {
+  name: "Iran"
+  id: 96
+  display_name: "Iran"
+}
+item {
+  name: "Iraq"
+  id: 97
+  display_name: "Iraq"
+}
+item {
+  name: "Ireland"
+  id: 98
+  display_name: "Ireland"
+}
+item {
+  name: "Israel"
+  id: 99
+  display_name: "Israel"
+}
+item {
+  name: "Italy"
+  id: 100
+  display_name: "Italy"
+}
+item {
+  name: "Ivory Coast"
+  id: 101
+  display_name: "Ivory Coast"
+}
+item {
+  name: "Jamaica"
+  id: 102
+  display_name: "Jamaica"
+}
+item {
+  name: "Japan"
+  id: 103
+  display_name: "Japan"
+}
+item {
+  name: "Jordan"
+  id: 104
+  display_name: "Jordan"
+}
+item {
+  name: "Kazakhstan"
+  id: 105
+  display_name: "Kazakhstan"
+}
+item {
+  name: "Kenya"
+  id: 106
+  display_name: "Kenya"
+}
+item {
+  name: "Kuwait"
+  id: 107
+  display_name: "Kuwait"
+}
+item {
+  name: "Kyrgyzstan"
+  id: 108
+  display_name: "Kyrgyzstan"
+}
+item {
+  name: "Laos"
+  id: 109
+  display_name: "Laos"
+}
+item {
+  name: "Latvia"
+  id: 110
+  display_name: "Latvia"
+}
+item {
+  name: "Lebanon"
+  id: 111
+  display_name: "Lebanon"
+}
+item {
+  name: "Lesotho"
+  id: 112
+  display_name: "Lesotho"
+}
+item {
+  name: "Liberia"
+  id: 113
+  display_name: "Liberia"
+}
+item {
+  name: "Libya"
+  id: 114
+  display_name: "Libya"
+}
+item {
+  name: "Liechtenstein"
+  id: 115
+  display_name: "Liechtenstein"
+}
+item {
+  name: "Lithuania"
+  id: 116
+  display_name: "Lithuania"
+}
+item {
+  name: "Luxembourg"
+  id: 117
+  display_name: "Luxembourg"
+}
+item {
+  name: "Macau"
+  id: 118
+  display_name: "Macau"
+}
+item {
+  name: "Macedonia"
+  id: 119
+  display_name: "Macedonia"
+}
+item {
+  name: "Madagascar"
+  id: 120
+  display_name: "Madagascar"
+}
+item {
+  name: "Malawi"
+  id: 121
+  display_name: "Malawi"
+}
+item {
+  name: "Malaysia"
+  id: 122
+  display_name: "Malaysia"
+}
+item {
+  name: "Maldives"
+  id: 123
+  display_name: "Maldives"
+}
+item {
+  name: "Mali"
+  id: 124
+  display_name: "Mali"
+}
+item {
+  name: "Malta"
+  id: 125
+  display_name: "Malta"
+}
+item {
+  name: "Marshall Islands"
+  id: 126
+  display_name: "Marshall Islands"
+}
+item {
+  name: "Martinique"
+  id: 127
+  display_name: "Martinique"
+}
+item {
+  name: "Mauritania"
+  id: 128
+  display_name: "Mauritania"
+}
+item {
+  name: "Mauritius"
+  id: 129
+  display_name: "Mauritius"
+}
+item {
+  name: "Mayotte"
+  id: 130
+  display_name: "Mayotte"
+}
+item {
+  name: "Mexico"
+  id: 131
+  display_name: "Mexico"
+}
+item {
+  name: "Moldova"
+  id: 132
+  display_name: "Moldova"
+}
+item {
+  name: "Monaco"
+  id: 133
+  display_name: "Monaco"
+}
+item {
+  name: "Mongolia"
+  id: 134
+  display_name: "Mongolia"
+}
+item {
+  name: "Montenegro"
+  id: 135
+  display_name: "Montenegro"
+}
+item {
+  name: "Montserrat"
+  id: 136
+  display_name: "Montserrat"
+}
+item {
+  name: "Morocco"
+  id: 137
+  display_name: "Morocco"
+}
+item {
+  name: "Mozambique"
+  id: 138
+  display_name: "Mozambique"
+}
+item {
+  name: "Myanmar"
+  id: 139
+  display_name: "Myanmar"
+}
+item {
+  name: "Namibia"
+  id: 140
+  display_name: "Namibia"
+}
+item {
+  name: "Nepal"
+  id: 141
+  display_name: "Nepal"
+}
+item {
+  name: "Netherlands"
+  id: 142
+  display_name: "Netherlands"
+}
+item {
+  name: "New Caledonia"
+  id: 143
+  display_name: "New Caledonia"
+}
+item {
+  name: "New Zealand"
+  id: 144
+  display_name: "New Zealand"
+}
+item {
+  name: "Nicaragua"
+  id: 145
+  display_name: "Nicaragua"
+}
+item {
+  name: "Niger"
+  id: 146
+  display_name: "Niger"
+}
+item {
+  name: "Nigeria"
+  id: 147
+  display_name: "Nigeria"
+}
+item {
+  name: "North Korea"
+  id: 148
+  display_name: "North Korea"
+}
+item {
+  name: "Northern Mariana Islands"
+  id: 149
+  display_name: "Northern Mariana Islands"
+}
+item {
+  name: "Norway"
+  id: 150
+  display_name: "Norway"
+}
+item {
+  name: "Oman"
+  id: 151
+  display_name: "Oman"
+}
+item {
+  name: "Pakistan"
+  id: 152
+  display_name: "Pakistan"
+}
+item {
+  name: "Palau"
+  id: 153
+  display_name: "Palau"
+}
+item {
+  name: "Palestine"
+  id: 154
+  display_name: "Palestine"
+}
+item {
+  name: "Panama"
+  id: 155
+  display_name: "Panama"
+}
+item {
+  name: "Papua New Guinea"
+  id: 156
+  display_name: "Papua New Guinea"
+}
+item {
+  name: "Paraguay"
+  id: 157
+  display_name: "Paraguay"
+}
+item {
+  name: "Peru"
+  id: 158
+  display_name: "Peru"
+}
+item {
+  name: "Philippines"
+  id: 159
+  display_name: "Philippines"
+}
+item {
+  name: "Poland"
+  id: 160
+  display_name: "Poland"
+}
+item {
+  name: "Portugal"
+  id: 161
+  display_name: "Portugal"
+}
+item {
+  name: "Puerto Rico"
+  id: 162
+  display_name: "Puerto Rico"
+}
+item {
+  name: "Qatar"
+  id: 163
+  display_name: "Qatar"
+}
+item {
+  name: "Reunion"
+  id: 164
+  display_name: "Reunion"
+}
+item {
+  name: "Romania"
+  id: 165
+  display_name: "Romania"
+}
+item {
+  name: "Russia"
+  id: 166
+  display_name: "Russia"
+}
+item {
+  name: "Rwanda"
+  id: 167
+  display_name: "Rwanda"
+}
+item {
+  name: "Saint Barthelemy"
+  id: 168
+  display_name: "Saint Barthelemy"
+}
+item {
+  name: "Saint Kitts and Nevis"
+  id: 169
+  display_name: "Saint Kitts and Nevis"
+}
+item {
+  name: "Saint Pierre and Miquelon"
+  id: 170
+  display_name: "Saint Pierre and Miquelon"
+}
+item {
+  name: "Saint Vincent and the Grenadines"
+  id: 171
+  display_name: "Saint Vincent and the Grenadines"
+}
+item {
+  name: "Saint-Martin"
+  id: 172
+  display_name: "Saint-Martin"
+}
+item {
+  name: "Samoa"
+  id: 173
+  display_name: "Samoa"
+}
+item {
+  name: "San Marino"
+  id: 174
+  display_name: "San Marino"
+}
+item {
+  name: "Sao Tome and Principe"
+  id: 175
+  display_name: "Sao Tome and Principe"
+}
+item {
+  name: "Saudi Arabia"
+  id: 176
+  display_name: "Saudi Arabia"
+}
+item {
+  name: "Senegal"
+  id: 177
+  display_name: "Senegal"
+}
+item {
+  name: "Serbia"
+  id: 178
+  display_name: "Serbia"
+}
+item {
+  name: "Seychelles"
+  id: 179
+  display_name: "Seychelles"
+}
+item {
+  name: "Sierra Leone"
+  id: 180
+  display_name: "Sierra Leone"
+}
+item {
+  name: "Singapore"
+  id: 181
+  display_name: "Singapore"
+}
+item {
+  name: "Sint Maarten"
+  id: 182
+  display_name: "Sint Maarten"
+}
+item {
+  name: "Slovakia"
+  id: 183
+  display_name: "Slovakia"
+}
+item {
+  name: "Slovenia"
+  id: 184
+  display_name: "Slovenia"
+}
+item {
+  name: "Solomon Islands"
+  id: 185
+  display_name: "Solomon Islands"
+}
+item {
+  name: "Somalia"
+  id: 186
+  display_name: "Somalia"
+}
+item {
+  name: "South Africa"
+  id: 187
+  display_name: "South Africa"
+}
+item {
+  name: "South Georgia and the South Sandwich Islands"
+  id: 188
+  display_name: "South Georgia and the South Sandwich Islands"
+}
+item {
+  name: "South Korea"
+  id: 189
+  display_name: "South Korea"
+}
+item {
+  name: "South Sudan"
+  id: 190
+  display_name: "South Sudan"
+}
+item {
+  name: "Spain"
+  id: 191
+  display_name: "Spain"
+}
+item {
+  name: "Sri Lanka"
+  id: 192
+  display_name: "Sri Lanka"
+}
+item {
+  name: "St Helena Ascension and Tristan da Cunha"
+  id: 193
+  display_name: "St Helena Ascension and Tristan da Cunha"
+}
+item {
+  name: "St. Lucia"
+  id: 194
+  display_name: "St. Lucia"
+}
+item {
+  name: "Sudan"
+  id: 195
+  display_name: "Sudan"
+}
+item {
+  name: "Suriname"
+  id: 196
+  display_name: "Suriname"
+}
+item {
+  name: "Svalbard and Jan Mayen"
+  id: 197
+  display_name: "Svalbard and Jan Mayen"
+}
+item {
+  name: "Swaziland"
+  id: 198
+  display_name: "Swaziland"
+}
+item {
+  name: "Sweden"
+  id: 199
+  display_name: "Sweden"
+}
+item {
+  name: "Switzerland"
+  id: 200
+  display_name: "Switzerland"
+}
+item {
+  name: "Syria"
+  id: 201
+  display_name: "Syria"
+}
+item {
+  name: "Taiwan"
+  id: 202
+  display_name: "Taiwan"
+}
+item {
+  name: "Tajikistan"
+  id: 203
+  display_name: "Tajikistan"
+}
+item {
+  name: "Tanzania"
+  id: 204
+  display_name: "Tanzania"
+}
+item {
+  name: "Thailand"
+  id: 205
+  display_name: "Thailand"
+}
+item {
+  name: "The Bahamas"
+  id: 206
+  display_name: "The Bahamas"
+}
+item {
+  name: "The Gambia"
+  id: 207
+  display_name: "The Gambia"
+}
+item {
+  name: "Togo"
+  id: 208
+  display_name: "Togo"
+}
+item {
+  name: "Tonga"
+  id: 209
+  display_name: "Tonga"
+}
+item {
+  name: "Trinidad and Tobago"
+  id: 210
+  display_name: "Trinidad and Tobago"
+}
+item {
+  name: "Tunisia"
+  id: 211
+  display_name: "Tunisia"
+}
+item {
+  name: "Turkey"
+  id: 212
+  display_name: "Turkey"
+}
+item {
+  name: "Turkmenistan"
+  id: 213
+  display_name: "Turkmenistan"
+}
+item {
+  name: "Turks and Caicos Islands"
+  id: 214
+  display_name: "Turks and Caicos Islands"
+}
+item {
+  name: "Tuvalu"
+  id: 215
+  display_name: "Tuvalu"
+}
+item {
+  name: "US Virgin Islands"
+  id: 216
+  display_name: "US Virgin Islands"
+}
+item {
+  name: "Uganda"
+  id: 217
+  display_name: "Uganda"
+}
+item {
+  name: "Ukraine"
+  id: 218
+  display_name: "Ukraine"
+}
+item {
+  name: "United Arab Emirates"
+  id: 219
+  display_name: "United Arab Emirates"
+}
+item {
+  name: "United Kingdom"
+  id: 220
+  display_name: "United Kingdom"
+}
+item {
+  name: "United States"
+  id: 221
+  display_name: "United States"
+}
+item {
+  name: "United States Minor Outlying Islands"
+  id: 222
+  display_name: "United States Minor Outlying Islands"
+}
+item {
+  name: "Uruguay"
+  id: 223
+  display_name: "Uruguay"
+}
+item {
+  name: "Uzbekistan"
+  id: 224
+  display_name: "Uzbekistan"
+}
+item {
+  name: "Vanuatu"
+  id: 225
+  display_name: "Vanuatu"
+}
+item {
+  name: "Vatican City"
+  id: 226
+  display_name: "Vatican City"
+}
+item {
+  name: "Venezuela"
+  id: 227
+  display_name: "Venezuela"
+}
+item {
+  name: "Vietnam"
+  id: 228
+  display_name: "Vietnam"
+}
+item {
+  name: "Western Sahara"
+  id: 229
+  display_name: "Western Sahara"
+}
+item {
+  name: "Yemen"
+  id: 230
+  display_name: "Yemen"
+}
+item {
+  name: "Zambia"
+  id: 231
+  display_name: "Zambia"
+}
+item {
+  name: "Zimbabwe"
+  id: 232
+  display_name: "Zimbabwe"
+}
