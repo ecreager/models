@@ -58,10 +58,10 @@ DATASET_NAME = 'OpenImages'
 ###############################################################################
 # Data processing
 ###############################################################################
-def get_filenames(is_training, data_dir):
+def get_filenames(is_training, data_dir, tfrecords_directory):
     """Return filenames for dataset."""
     
-    filenames = tf.gfile.Glob('gs://inclusive-images-data/tfrecords/train-*-of-01024')
+    filenames = tf.gfile.Glob('{}/train-*-of-01024'.format(tfrecords_directory))
     
     if is_training:
         return filenames[:_NUM_TRAIN_FILES-_NUM_VAL_FILES]
@@ -180,7 +180,7 @@ def input_fn(is_training, data_dir, batch_size, num_epochs=1, num_gpus=None,
     Returns:
     A dataset that can be used for iteration.
     """
-    filenames = get_filenames(is_training, data_dir)
+    filenames = get_filenames(is_training, data_dir, flags.FLAGS.tfrecords_directory)
     dataset = tf.data.Dataset.from_tensor_slices(filenames)
 
     if is_training:
@@ -328,6 +328,8 @@ def define_imagenet_flags():
       resnet_size_choices=['18', '34', '50', '101', '152', '200'])
     flags.adopt_module_key_flags(resnet_run_loop)
     flags_core.set_defaults(train_epochs=90)
+    flags.DEFINE_string('tfrecords_directory', None,
+                       'should point to tfrecords part of our bucket')
 
 
 def run_imagenet(flags_obj):
@@ -345,8 +347,10 @@ def run_imagenet(flags_obj):
 
 
 def main(_):
-    
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = flags.FLAGS.key
+    if not 'GOOGLE_APPLICATION_CREDENTIALS' in os.environ.keys():
+        assert False, 'missing google application credential; ask elliot'
+
+    assert flags.FLAGS.tfrecords_directory, 'this should point to tfrecords part of our bucket'
 
     with logger.benchmark_context(flags.FLAGS):
         run_imagenet(flags.FLAGS)
