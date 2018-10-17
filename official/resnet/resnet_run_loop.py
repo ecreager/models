@@ -29,7 +29,7 @@ import os
 # pylint: disable=g-bad-import-order
 from absl import flags
 import tensorflow as tf
-from metrics import f_score
+from official.resnet.metrics import f_score
 
 from official.resnet import resnet_model
 from official.utils.flags import core as flags_core
