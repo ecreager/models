@@ -13,7 +13,6 @@
 # limitations under the License.
 # ==============================================================================
 """Contains utility and supporting functions for ResNet.
-
   This module contains ResNet code which does not directly build layers. This
 includes dataset management, hyperparameter and optimizer code, and argument
 parsing. Code for defining the ResNet layers can be found in resnet_model.py.
@@ -30,6 +29,7 @@ import os
 # pylint: disable=g-bad-import-order
 from absl import flags
 import tensorflow as tf
+from metrics import f_score
 
 from official.resnet import resnet_model
 from official.utils.flags import core as flags_core
@@ -49,7 +49,6 @@ def process_record_dataset(dataset, is_training, batch_size, shuffle_buffer,
                            parse_record_fn, num_epochs=1, num_gpus=None,
                            examples_per_epoch=None, dtype=tf.float32):
   """Given a Dataset with raw records, return an iterator over the records.
-
   Args:
     dataset: A Dataset representing raw records
     is_training: A boolean denoting whether the input is for training.
@@ -63,7 +62,6 @@ def process_record_dataset(dataset, is_training, batch_size, shuffle_buffer,
     num_gpus: The number of gpus used for training.
     examples_per_epoch: The number of examples in an epoch.
     dtype: Data type to use for images/features.
-
   Returns:
     Dataset of (image, label) pairs ready for iteration.
   """
@@ -100,12 +98,10 @@ def process_record_dataset(dataset, is_training, batch_size, shuffle_buffer,
 def get_synth_input_fn(height, width, num_channels, num_classes,
                        dtype=tf.float32):
   """Returns an input function that returns a dataset with random data.
-
   This input_fn returns a data set that iterates over a set of random data and
   bypasses all preprocessing, e.g. jpeg decode and copy. The host to device
   copy is still included. This used to find the upper throughput bound when
   tunning the full input pipeline.
-
   Args:
     height: Integer height that will be used to create a fake image tensor.
     width: Integer width that will be used to create a fake image tensor.
@@ -113,7 +109,6 @@ def get_synth_input_fn(height, width, num_channels, num_classes,
     num_classes: Number of classes that should be represented in the fake labels
       tensor
     dtype: Data type for features/images.
-
   Returns:
     An input_fn that can be used in place of a real one to return a dataset
     that can be used for iteration.
@@ -169,7 +164,6 @@ def learning_rate_with_decay(
     batch_size, batch_denom, num_images, boundary_epochs, decay_rates,
     base_lr=0.1, warmup=False):
   """Get a learning rate that decays step-wise as training progresses.
-
   Args:
     batch_size: the number of examples processed in each training batch.
     batch_denom: this value will be used to scale the base learning rate.
@@ -217,14 +211,12 @@ def resnet_model_fn(features, labels, mode, model_class,
                     loss_filter_fn=None, dtype=resnet_model.DEFAULT_DTYPE,
                     fine_tune=False):
   """Shared functionality for different resnet model_fns.
-
   Initializes the ResnetModel representing the model layers
   and uses that model to build the necessary EstimatorSpecs for
   the `mode` in question. For training, this means building losses,
   the optimizer, and the train op that get passed into the EstimatorSpec.
   For evaluation and prediction, the EstimatorSpec is returned without
   a train op, but with the necessary parameters for the given mode.
-
   Args:
     features: tensor representing input images
     labels: tensor representing class labels for all input images
@@ -249,7 +241,6 @@ def resnet_model_fn(features, labels, mode, model_class,
       from the loss.
     dtype: the TensorFlow dtype to use for calculations.
     fine_tune: If True only train the dense layers(final layers).
-
   Returns:
     EstimatorSpec parameterized according to the input params and the
     current mode.
@@ -269,9 +260,10 @@ def resnet_model_fn(features, labels, mode, model_class,
   # not a SparseTensor). If dtype is is low precision, logits must be cast to
   # fp32 for numerical stability.
   logits = tf.cast(logits, tf.float32)
+  preds = tf.nn.sigmoid(logits)
 
   predictions = {
-      'classes': tf.argmax(logits, axis=1),
+      'classes': preds,
       'probabilities': tf.nn.softmax(logits, name='softmax_tensor')
   }
 
@@ -285,8 +277,7 @@ def resnet_model_fn(features, labels, mode, model_class,
         })
 
   # Calculate loss, which includes softmax cross entropy and L2 regularization.
-  cross_entropy = tf.losses.sparse_softmax_cross_entropy(
-      logits=logits, labels=labels)
+  cross_entropy = tf.losses.sigmoid_cross_entropy(labels, logits)
 
   # Create a tensor named cross_entropy for logging purposes.
   tf.identity(cross_entropy, name='cross_entropy')
@@ -322,9 +313,7 @@ def resnet_model_fn(features, labels, mode, model_class,
 
     def _dense_grad_filter(gvs):
       """Only apply gradient updates to the final layer.
-
       This function is used for fine tuning.
-
       Args:
         gvs: list of tuples with gradients and variable info
       Returns:
@@ -357,19 +346,35 @@ def resnet_model_fn(features, labels, mode, model_class,
   else:
     train_op = None
 
-  accuracy = tf.metrics.accuracy(labels, predictions['classes'])
-  accuracy_top_5 = tf.metrics.mean(tf.nn.in_top_k(predictions=logits,
-                                                  targets=labels,
-                                                  k=5,
-                                                  name='top_5_op'))
-  metrics = {'accuracy': accuracy,
-             'accuracy_top_5': accuracy_top_5}
+  score = f_score(labels, preds)
 
-  # Create a tensor named train_accuracy for logging purposes
-  tf.identity(accuracy[1], name='train_accuracy')
-  tf.identity(accuracy_top_5[1], name='train_accuracy_top_5')
-  tf.summary.scalar('train_accuracy', accuracy[1])
-  tf.summary.scalar('train_accuracy_top_5', accuracy_top_5[1])
+  score = tf.Print(score, [score], message='F-score')
+    
+  recall = tf.metrics.recall(labels, preds)
+  precision = tf.metrics.precision(labels, preds)
+
+  score_tf = tf.contrib.metrics.f1_score(labels, preds)
+
+  metrics = {'recall': recall,
+             'precision': precision,
+             'f1_score': score_tf,
+            }
+
+  # Create a tensor named train_recall for logging purposes
+  tf.identity(recall[1], name='train_recall')
+  tf.summary.scalar('train_recall', recall[1])
+
+  # Create a tensor named train_precision for logging purposes
+  tf.identity(precision[1], name='train_precision')
+  tf.summary.scalar('train_precision', precision[1])
+    
+  # Create a tensor named train_f1_score for logging purposes
+  tf.identity(score_tf[1], name='f1_score')
+  tf.summary.scalar('f1_score', score_tf[1])
+
+  # Create a tensor named f2_score for logging purposes
+  tf.identity(score, name='f2_score')
+  tf.summary.scalar('f2_score', score)
 
   return tf.estimator.EstimatorSpec(
       mode=mode,
@@ -382,7 +387,6 @@ def resnet_model_fn(features, labels, mode, model_class,
 def resnet_main(
     flags_obj, model_function, input_function, dataset_name, shape=None):
   """Shared main loop for ResNet Models.
-
   Args:
     flags_obj: An object containing parsed flags. See define_resnet_flags()
       for details.
@@ -451,11 +455,20 @@ def resnet_main(
   benchmark_logger = logger.get_benchmark_logger()
   benchmark_logger.log_run_info('resnet', dataset_name, run_params,
                                 test_id=flags_obj.benchmark_test_id)
+  tensors_to_log = {
+        'learning_rate': 'learning_rate',
+        'cross_entropy': 'cross_entropy',
+        'train_recall': 'train_recall',
+        'train_precision': 'train_precision',
+        'f2_score': 'f2_score',
+        'f1_score': 'f1_score'
+    }
 
   train_hooks = hooks_helper.get_train_hooks(
       flags_obj.hooks,
       model_dir=flags_obj.model_dir,
-      batch_size=flags_obj.batch_size)
+      batch_size=flags_obj.batch_size,
+      tensors_to_log=tensors_to_log)
 
   def input_fn_train(num_epochs):
     return input_function(
@@ -511,7 +524,7 @@ def resnet_main(
     benchmark_logger.log_evaluation_result(eval_results)
 
     if model_helpers.past_stop_threshold(
-        flags_obj.stop_threshold, eval_results['accuracy']):
+        flags_obj.stop_threshold, eval_results['f1_score']):
       break
 
   if flags_obj.export_dir is not None:
@@ -562,6 +575,8 @@ def define_resnet_flags(resnet_size_choices=None):
           'the expense of image resize/cropping being done as part of model '
           'inference. Note, this flag only applies to ImageNet and cannot '
           'be used for CIFAR.'))
+
+  flags.DEFINE_string(name='key', default=None, help=flags_core.help_wrap('Key for gcloud bucket.'))
 
   choice_kwargs = dict(
       name='resnet_size', short_name='rs', default='50',
