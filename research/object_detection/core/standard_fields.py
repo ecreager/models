@@ -170,6 +170,8 @@ class TfExampleFields(object):
     source_id: original source of the image
     image_class_text: image-level label in text format
     image_class_label: image-level label in numerical format
+    country_class_text: country labels in text format, e.g. ["Norway", "France"]
+    country_class_label: labels in numbers, e.g. [47, 2]
     object_class_text: labels in text format, e.g. ["person", "cat"]
     object_class_label: labels in numbers, e.g. [16, 8]
     object_bbox_xmin: xmin coordinates of groundtruth box, e.g. 10, 30
@@ -206,6 +208,8 @@ class TfExampleFields(object):
   source_id = 'image/source_id'
   image_class_text = 'image/class/text'
   image_class_label = 'image/class/label'
+  country_class_text = 'image/country/text'
+  country_class_label = 'image/country/label'
   object_class_text = 'image/object/class/text'
   object_class_label = 'image/object/class/label'
   object_bbox_ymin = 'image/object/bbox/ymin'

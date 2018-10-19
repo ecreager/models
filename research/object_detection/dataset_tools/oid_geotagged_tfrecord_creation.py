@@ -24,14 +24,14 @@ from object_detection.core import standard_fields
 from object_detection.utils import dataset_util
 
 
-def tf_example_from_annotations_data_frame(annotations_data_frame, label_map,
+def tf_example_from_annotations_data_frame(annotations_data_frame, label_maps,
                                            encoded_image):
   """Populates a TF Example message with image annotations from a data frame.
 
   Args:
     annotations_data_frame: Data frame containing the annotations for a single
       image.
-    label_map: String to integer label map.
+    label_maps: list of label maps (first = labels, second = countries)
     encoded_image: The encoded image string
 
   Returns:
@@ -39,8 +39,12 @@ def tf_example_from_annotations_data_frame(annotations_data_frame, label_map,
     label_map. Otherwise, returns None.
   """
 
+  label_map, country_map = label_maps
+  
   filtered_data_frame = annotations_data_frame[
       annotations_data_frame.LabelName.isin(label_map)]
+  filtered_data_frame = filtered_data_frame[
+      filtered_data_frame.country.isin(country_map)]
   filtered_data_frame_boxes = filtered_data_frame[
       ~filtered_data_frame.YMin.isnull()]
   filtered_data_frame_labels = filtered_data_frame[
@@ -66,6 +70,13 @@ def tf_example_from_annotations_data_frame(annotations_data_frame, label_map,
       standard_fields.TfExampleFields.object_class_label:
           dataset_util.int64_list_feature(
               filtered_data_frame_boxes.LabelName.map(lambda x: label_map[x])
+              .as_matrix()),
+      standard_fields.TfExampleFields.country_class_text:
+          dataset_util.bytes_list_feature(
+              filtered_data_frame_boxes.country.as_matrix()),
+      standard_fields.TfExampleFields.country_class_label:
+          dataset_util.int64_list_feature(
+              filtered_data_frame_boxes.country.map(lambda x: country_map[x])
               .as_matrix()),
       standard_fields.TfExampleFields.filename:
           dataset_util.bytes_feature('{}.jpg'.format(image_id)),

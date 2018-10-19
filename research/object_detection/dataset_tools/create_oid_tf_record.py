@@ -48,6 +48,7 @@ import pandas as pd
 import tensorflow as tf
 
 from object_detection.dataset_tools import oid_tfrecord_creation
+from object_detection.dataset_tools import oid_geotagged_tfrecord_creation
 from object_detection.dataset_tools import tf_record_creation_util
 from object_detection.utils import label_map_util
 
@@ -59,14 +60,19 @@ tf.flags.DEFINE_string(
   'input_box_annotations_csv', None,
   'Path to CSV containing image bounding box annotations')
 tf.flags.DEFINE_string(
+  'input_geotags_csv', None,
+  'Path to CSV containing image-level geotags annotations')
+tf.flags.DEFINE_string(
   'input_images_directory', None,
   'Directory containing the image pixels '
   'downloaded from the OpenImages GitHub repository.')
 tf.flags.DEFINE_string(
   'input_image_label_annotations_csv', None,
-  'Path to CSV containing image-level labels annotations')
+  '(optional) Path to CSV containing image-level labels annotations')
 tf.flags.DEFINE_string(
   'input_label_map', None, 'Path to the label map proto')
+tf.flags.DEFINE_string(
+  'input_country_map', None, 'Path to the country map proto')
 tf.flags.DEFINE_string(
     'output_directory', None, 
   'Path to the output TFRecord. The shard index and the number of shards '
@@ -119,6 +125,12 @@ def _process_image_files_batch(dataframe, thread_index, ranges, name, num_shards
     sd.groupby('ImageID', sort=False) for sd in sub_dataframes
   ]
   
+  # determine whether to include country geotag in records
+  if FLAGS.input_geotags_csv:
+    get_example = oid_geotagged_tfrecord_creation.tf_example_from_annotations_data_frame
+  else:
+    get_example = oid_tfrecord_creation.tf_example_from_annotations_data_frame
+  
   for s, groupby in enumerate(sub_groupbys):
     shard = thread_index * num_shards_per_batch + s
     output_filename = '%s-%.5d-of-%.5d' % (name, shard, num_shards)
@@ -134,8 +146,8 @@ def _process_image_files_batch(dataframe, thread_index, ranges, name, num_shards
       with tf.gfile.Open(image_path, 'rb') as image_file:
         encoded_image = image_file.read()
 
-      tf_example = oid_tfrecord_creation.tf_example_from_annotations_data_frame(
-          image_annotations, label_map, encoded_image)
+         
+      tf_example = get_example(image_annotations, label_map, encoded_image)
       if tf_example:
         writer.write(tf_example.SerializeToString())
         shard_counter += 1
@@ -166,13 +178,23 @@ def main(_):
 
   required_flags = [
       'input_box_annotations_csv', 'input_images_directory', 'input_label_map',
-      'output_directory'
+      'output_directory', 'input_geotags_csv', 'input_country_map'
   ]
   for flag_name in required_flags:
     if not getattr(FLAGS, flag_name):
       raise ValueError('Flag --{} is required'.format(flag_name))
+      
+  if FLAGS.input_geotags_csv:
+    assert FLAGS.input_country_map, 'use both or neither'
 
   label_map = label_map_util.get_label_map_dict(FLAGS.input_label_map)
+  if FLAGS.input_country_map:
+    label_map = [
+      label_map_util.get_label_map_dict(FLAGS.input_label_map),
+      label_map_util.get_label_map_dict(FLAGS.input_country_map)
+    ]
+  else:
+      label_map = label_map_util.get_label_map_dict(FLAGS.input_label_map),
   all_box_annotations = pd.read_csv(FLAGS.input_box_annotations_csv)
   if FLAGS.input_image_label_annotations_csv:
     all_label_annotations = pd.read_csv(FLAGS.input_image_label_annotations_csv)
@@ -190,8 +212,15 @@ def main(_):
         os.path.join(FLAGS.input_images_directory, '*.jpg'))
   all_image_ids = [os.path.splitext(os.path.basename(v))[0] for v in all_images]
   all_image_ids = pd.DataFrame({'ImageID': all_image_ids})
+  if FLAGS.input_geotags_csv:
+    all_geotags = pd.read_csv(tf.gfile.Open(FLAGS.input_geotags_csv, 'r'))
+  else:
+    all_geotags = None
+    
+      
   all_annotations = pd.concat(
-      [all_box_annotations, all_image_ids, all_label_annotations])
+      [all_box_annotations, all_image_ids,
+       all_label_annotations, all_geotags])
 
   tf.logging.log(tf.logging.INFO, 'Found %d images...', len(all_image_ids))
 
