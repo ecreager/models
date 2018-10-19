@@ -39,6 +39,12 @@ def tf_example_from_annotations_data_frame(annotations_data_frame, label_map,
     label_map. Otherwise, returns None.
   """
 
+  #print(1, len(annotations_data_frame))
+  #print(2, len(label_map))
+  #print(3, encoded_image)
+  #1/0
+  #exit()
+
   filtered_data_frame = annotations_data_frame[
       annotations_data_frame.LabelName.isin(label_map)]
   filtered_data_frame_boxes = filtered_data_frame[
